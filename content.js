@@ -20,15 +20,12 @@ function fillForm(answers) {
       const matchedKey = Object.keys(answers).find((k) => {
         const normalizedKey = normalizeText(k);
         // Correspondance floue : la clé est contenue dans la question ou inversement
-        return (
-          normalizedQuestion.includes(normalizedKey) ||
-          normalizedKey.includes(normalizedQuestion)
-        );
+        return normalizedQuestion.includes(normalizedKey);
+        //  ||
+        // normalizedKey.includes(normalizedQuestion)
       });
 
       if (!matchedKey) return; // pas de correspondance trouvée
-
-      // if (!answers.hasOwnProperty(questionText)) return;
 
       const answer = answers[matchedKey];
 
@@ -45,9 +42,7 @@ function fillForm(answers) {
       if (radioOptions.length > 0) {
         radioOptions.forEach((option) => {
           if (option.ariaLabel.trim() === answer) {
-            
             option.click();
-            
           }
         });
         return;
@@ -62,9 +57,7 @@ function fillForm(answers) {
           : answer.split("&").map((a) => a.trim());
         checkOptions.forEach((option) => {
           if (answersArray.includes(option.ariaLabel.trim())) {
-            
             option.click();
-            
           }
         });
         return;
