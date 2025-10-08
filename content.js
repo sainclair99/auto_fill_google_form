@@ -87,21 +87,7 @@ function fillForm(answers) {
         dateInput.dispatchEvent(new Event("input", { bubbles: true }));
         return;
       }
-
-      //! ---- File upload ----
-      const fileInput = q.querySelector('input[type="file"]');
-      if (fileInput) {
-        fileInput.scrollIntoView({ behavior: "smooth", block: "center" });
-        fileInput.style.outline = "3px solid #f39c12";
-        const msg = document.createElement("div");
-        msg.textContent = "🟡 Veuillez télécharger le fichier correspondant.";
-        msg.style.color = "#f39c12";
-        msg.style.fontSize = "0.9rem";
-        msg.style.marginTop = "4px";
-        q.appendChild(msg);
-        return;
-      }
-
+      
       //! --- Dropdown (select menus) ---
       const selectMenu = q.querySelector("select");
       if (selectMenu) {

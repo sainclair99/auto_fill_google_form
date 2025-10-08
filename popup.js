@@ -81,7 +81,7 @@ importFile.addEventListener("change", (event) => {
       fieldsDiv.innerHTML = "";
       importedFields.forEach((f) => createField(f.key, f.value));
       chrome.storage.local.set({ fields: importedFields });
-      alert("✅ Champs importés avec succès !");
+      // alert("✅ Champs importés avec succès !");
     } catch (err) {
       alert("❌ Erreur lors de l’import : " + err.message);
     }
