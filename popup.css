@@ -1,0 +1,70 @@
+body {
+  font-family: Arial;
+  padding: 0px 5px 10px 5px;
+  width: 500px;
+  font-size: large;
+}
+input {
+  width: 100%;
+  margin-bottom: 5px;
+  font-size: 15px;
+  padding: 10px 2px 10px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(128, 128, 128, 0.817);
+  background-color: rgba(100, 100, 100, 0.1);
+}
+#btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+button {
+  margin-top: 5px;
+  width: 95%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: medium;
+  border-radius: 6px;
+  background-color: #0492c2;
+  color: white;
+  border: 0px;
+  cursor: pointer;
+}
+button:hover {
+  animation: scaleUp 0.5s ease-in-out forwards;
+}
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 0 #4a5158e1;
+}
+.field {
+  width: 100%;
+  display: flex;
+  margin-bottom: 5px;
+  gap: 5px;
+}
+.field input {
+  flex: 1;
+}
+input:focus {
+  outline-color: #0492c2;
+}
+@keyframes scaleUp {
+  form {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+#importExport {
+  width: 95%;
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+}
+
+#importExport button {
+  width: 40%;
+}

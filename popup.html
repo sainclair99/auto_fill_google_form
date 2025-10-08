@@ -3,77 +3,24 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <title>Remplissage Auto google forms</title>
-    <style>
-      body {
-        font-family: Arial;
-        padding: 0px 5px 10px 5px;
-        width: 500px;
-        font-size: large;
-      }
-      input {
-        width: 100%;
-        margin-bottom: 5px;
-        font-size: 15px;
-        padding: 10px 2px 10px 10px;
-        border-radius: 6px;
-        border: 1px solid gray;
-        background-color: rgba(100, 100, 100, 0.1);
-      }
-      #btns {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      button {
-        margin-top: 5px;
-        width: 95%;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        font-size: medium;
-        border-radius: 6px;
-        background-color: green;
-        color: white;
-        border: 0px;
-        cursor: pointer;
-      }
-      button:hover {
-        animation: scaleUp 0.5s ease-in-out forwards;
-      }
-      button:active {
-        transform: scale(0.95);
-        box-shadow: 0 2px 0 #4a5158e1;
-      }
-      .field {
-        width: 100%;
-        display: flex;
-        margin-bottom: 5px;
-        gap: 5px;
-      }
-      .field input {
-        flex: 1;
-      }
-      input:focus {
-        outline-color: green;
-      }
-      @keyframes scaleUp {
-        form {
-          transform: scale(1);
-        }
-        to {
-          transform: scale(1.05);
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
-    <h3>Ajouter un champ</h3>
+    <h3>
+      <img src="icons/icon128.png" width="50px" /> Remplissage Automatique
+      (Google Forms)
+    </h3>
     <div id="fields"></div>
 
     <div id="btns">
       <button id="addField">&plus; Ajouter un champ</button>
-      <button id="save">Sauvegarder et remplir</button>
+      <button id="save">💾 Sauvegarder et remplir</button>
+      <div id="importExport">
+        <button id="importFields">📂 Importer(.json)</button>
+        <button id="exportFields">⬇️ Exporter(.json)</button>
+      </div>
     </div>
-
+    <input type="file" id="importFile" accept=".json" style="display: none" />
     <script src="popup.js"></script>
   </body>
 </html>

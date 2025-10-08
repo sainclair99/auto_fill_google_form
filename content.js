@@ -4,6 +4,9 @@ function fillForm(answers) {
   setTimeout(() => {
     const questions = document.querySelectorAll('div[role="listitem"]');
 
+    const fileInputs = document.querySelectorAll("input");
+    console.log("fileInputs ==> ", fileInputs);
+
     questions.forEach((q) => {
       const labelEl =
         q.querySelector('div[role="heading"]') ||
@@ -20,7 +23,12 @@ function fillForm(answers) {
       const matchedKey = Object.keys(answers).find((k) => {
         const normalizedKey = normalizeText(k);
         // Correspondance floue : la clé est contenue dans la question ou inversement
-        return normalizedQuestion.includes(normalizedKey);
+        if (normalizedKey == "noms") {
+          return normalizedQuestion == normalizedKey;
+        } else {
+          return normalizedQuestion.includes(normalizedKey);
+        }
+        // return normalizedQuestion.includes(normalizedKey);
         //  ||
         // normalizedKey.includes(normalizedQuestion)
       });
@@ -55,8 +63,17 @@ function fillForm(answers) {
         const answersArray = Array.isArray(answer)
           ? answer
           : answer.split("&").map((a) => a.trim());
+
         checkOptions.forEach((option) => {
-          if (answersArray.includes(option.ariaLabel.trim())) {
+          const isChecked = option.getAttribute("aria-checked") === "true";
+          const shouldBeChecked = answersArray.includes(
+            option.ariaLabel.trim()
+          );
+          if (shouldBeChecked && !isChecked) {
+            option.click();
+          }
+
+          if (isChecked && !shouldBeChecked) {
             option.click();
           }
         });
@@ -65,10 +82,23 @@ function fillForm(answers) {
 
       // * --- Date ---
       const dateInput = q.querySelector('input[type="date"]');
-      console.log("Date input found:", dateInput);
       if (dateInput) {
         dateInput.value = answer; // format attendu : "YYYY-MM-DD"
         dateInput.dispatchEvent(new Event("input", { bubbles: true }));
+        return;
+      }
+
+      //! ---- File upload ----
+      const fileInput = q.querySelector('input[type="file"]');
+      if (fileInput) {
+        fileInput.scrollIntoView({ behavior: "smooth", block: "center" });
+        fileInput.style.outline = "3px solid #f39c12";
+        const msg = document.createElement("div");
+        msg.textContent = "🟡 Veuillez télécharger le fichier correspondant.";
+        msg.style.color = "#f39c12";
+        msg.style.fontSize = "0.9rem";
+        msg.style.marginTop = "4px";
+        q.appendChild(msg);
         return;
       }
 
@@ -108,3 +138,15 @@ function normalizeText(text) {
     .replace(/[^\w\sÀ-ÿ?]/g, "") // supprimer ponctuation sauf les lettres accentuées
     .trim();
 }
+
+// ---- Auto-fill when the Google Form page loads ----
+window.addEventListener("load", () => {
+  chrome.storage.local.get("answers", (data) => {
+    if (data.answers) {
+      // console.log("⚙️ Auto-fill triggered with saved answers:", data.answers);
+      fillForm(data.answers);
+    } else {
+      console.log("ℹ️ No saved answers found in storage.");
+    }
+  });
+});

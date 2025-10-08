@@ -3,7 +3,7 @@
   "name": "Auto Fill Google Forms",
   "version": "1.0",
   "description": "Remplit automatiquement un Google Form",
-  "developer": {
+  "author": {
     "name": "Nkwenti Fonkou Alain Sainclair"
   },
   "permissions": ["activeTab", "scripting", "storage"],
@@ -15,5 +15,8 @@
   ],
   "action": {
     "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icons/icon128.png"
   }
 }
